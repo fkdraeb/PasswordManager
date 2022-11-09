@@ -5,19 +5,19 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public @Data class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column (nullable = false, unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String password;
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String firstName;
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String lastName;
 
     public User(Integer id, String email, String password, String firstName, String lastName) {
