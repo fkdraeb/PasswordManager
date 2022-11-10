@@ -12,17 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @RestController
-public class Controller {
-
+public class UserController {
 
     @Autowired
     UserRepository userRepository;
-
-    @GetMapping("")
-    public ModelAndView homePage(ModelAndView modelAndView) {
-        modelAndView.setViewName("homepage.html");
-        return modelAndView;
-    }
 
     @GetMapping("/register")
     public ModelAndView registerPage(ModelAndView modelAndView) {
@@ -48,5 +41,4 @@ public class Controller {
         modelAndView.setViewName("users.html");
         return modelAndView;
     }
-
 }
