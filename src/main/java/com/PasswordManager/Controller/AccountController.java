@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,7 +18,7 @@ public class AccountController {
     @Autowired
     AccountRepository accountRepository;
 
-    @GetMapping("")
+    @GetMapping("/")
     public ModelAndView homePage(ModelAndView modelAndView) {
         modelAndView.setViewName("homepage.html");
         return modelAndView;
@@ -26,7 +27,7 @@ public class AccountController {
     @PostMapping("/process_account")
     public ModelAndView processAccount(ModelAndView modelAndView, Account account) {
         accountRepository.save(account);
-        modelAndView.setViewName("new-account.html");
+        modelAndView.setViewName("redirect:/accounts");
         return modelAndView;
     }
 
@@ -45,6 +46,13 @@ public class AccountController {
         List<Account> listAccounts = accountRepository.findByEmail(name);
         modelAndView.addObject("listAccounts", listAccounts);
         modelAndView.setViewName("accounts.html");
+        return modelAndView;
+    }
+
+    @GetMapping("/delete/{id}")
+    public ModelAndView deleteAccount(@PathVariable("id") int id, ModelAndView modelAndView) {
+        accountRepository.deleteById(id);
+        modelAndView.setViewName("redirect:/accounts");
         return modelAndView;
     }
 

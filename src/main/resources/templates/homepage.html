@@ -2,18 +2,23 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Homepage</title>
+    <title>Password Manager</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <!--<link rel="stylesheet" href="/style.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+<div class="container">
+    <div class="branding">
+        <div class="water"></div>
+    </div>
+</div>
 
 <div class="container text-center">
     <h1>Welcome to Password Manager</h1>
     <h3><a th:href="@{/users}">List of Users</a></h3>
-    <h3><a th:href="@{/accounts}">List of Accounts</a></h3>
+    <h3><a th:href="@{/accounts}">Passwords</a></h3>
     <h3><a th:href="@{/register}">Register</a></h3>
-    <h3><a th:href="@{/register-account}">Register Account</a></h3>
     <h3><a th:href="@{/login}">Login</a></h3>
 </div>
 
