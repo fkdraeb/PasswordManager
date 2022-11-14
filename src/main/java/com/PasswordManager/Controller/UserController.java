@@ -17,6 +17,16 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
+
+    /*
+    String existedUsername = service.createUser(userDTO);
+    if(existedUsername != null){
+        model.addAttribute("existedUsername",existedUsername);
+    }
+
+    return "registrationstatus";
+     */
+
     @GetMapping("/register")
     public ModelAndView registerPage(ModelAndView modelAndView) {
         modelAndView.addObject("user", new User());
@@ -26,10 +36,17 @@ public class UserController {
 
     @PostMapping("/process_register")
     public ModelAndView processRegister(ModelAndView modelAndView, User user) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
-        userRepository.save(user);
+
+        //Verifica se já existe algum user na BD, caso exista emite um alerta que vai ser "buscado" pelo Thymeleaf
+        String verifyUser = user.getEmail();
+        if (userRepository.findByEmail(verifyUser) != null) {
+            modelAndView.addObject("verifyUser", verifyUser);
+        } else {
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String encodedPassword = passwordEncoder.encode(user.getPassword());
+            user.setPassword(encodedPassword);
+            userRepository.save(user);
+        }
         modelAndView.setViewName("sign-up.html");
         return modelAndView;
     }

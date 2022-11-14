@@ -46,16 +46,25 @@
                                required minlength="2" maxlength="20"/>
                     </div>
                 </div>
-
+                <div class="errorMsgUser">
+                    <div th:if="${verifyUser != null}" class="alert alert-danger notification" role="alert">
+                        <p th:text="${verifyUser}"></p> is already taken, please choose another email.
+                    </div>
+                </div>
                 <div>
                     <button type="submit" class="btn btn-dark">Sign Up</button>
                 </div>
             </div>
         </form>
     </div>
-    <div class="results" th:if="${user.id != null}">
+    <div class="results sucess" th:if="${user.id != null}">
         <h3>You have signed up successfully!</h3>
-        <h4><a th:href="@{/login}">Click here to Login</a></h4>
+        <form th:action="@{/}">
+            <button class="btn btn-dark">Home</button>
+        </form>
+        <a th:href="@{/login}">
+            <button class="btn btn-dark">Login</button>
+        </a>
     </div>
 
 </div>

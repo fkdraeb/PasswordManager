@@ -11,6 +11,11 @@ form {
     padding-top: 30px;
 }
 
+.results button.btn.btn-dark {
+    margin-top: 20px;
+    margin-right: 5px;
+}
+
 h1 {
     padding-bottom: 50px;
 }
@@ -20,7 +25,21 @@ td {
     background-color: #898989;
 }
 
-a {
+.alert.alert-danger.notification{
+    margin: auto;
+    width: 800px;
+    margin-bottom: 20px;
+}
+
+.alert.alert-danger.notification, p{
+    display: inline;
+}
+
+.errorMsgUser {
+    padding: 20px 0 20px;
+}
+
+.container.text-center.tabs a {
   background-image: linear-gradient(
     to right,
     white,
@@ -38,12 +57,11 @@ a {
 
 }
 
-
-a:hover {
+.container.text-center.tabs a:hover {
  background-position: 0;
 }
 
-a:hover::before{
+.container.text-center.tabs a:hover::before{
   width: 100%;
 }
 
