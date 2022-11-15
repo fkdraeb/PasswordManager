@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Sign Up Page</title>
@@ -17,7 +17,6 @@
 </head>
 <body>
 <div class="container text-center">
-
     <p>
         Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
     </p>
@@ -31,16 +30,16 @@
         </form>
     </div>
     <div class="results">
-        <h2>Account Registration</h2>
+        <h2>Edit Account</h2>
     </div>
-    <div class="results" th:if="${account.id == null}">
-        <form th:action="@{/process_account}" th:object="${account}"
+    <div class="results">
+        <form th:action="@{/process_edit}" th:object="${account}"
               method="post" style="max-width: 600px; margin: 0 auto;">
             <div class="m-3">
                 <div class="form-group row">
-                    <label class="col-4 col-form-label">E-mail: </label>
+                    <label class="col-4 col-form-label">Email: </label>
                     <div class="col-8">
-                        <input type="email" th:value="${#request.userPrincipal.principal.username}"
+                        <input type="text" th:value="${#request.userPrincipal.principal.username}"
                                class="form-control" readonly="readonly"/>
                     </div>
                 </div>
@@ -56,21 +55,18 @@
                 <div class="form-group row">
                     <label class="col-4 col-form-label">Password: </label>
                     <div class="col-8">
-                        <input type="password" th:field="*{password}" class="form-control"
+                        <input type="text" th:field="*{password}" class="form-control"
                                required minlength="2" maxlength="20"/>
                     </div>
                 </div>
                 <div>
-                    <button type="submit" class="btn btn-dark">Create account</button>
+                    <button type="submit" class="btn btn-dark">Edit account</button>
                 </div>
+
+                <input type="hidden" id="id" th:field="*{id}">
             </div>
         </form>
     </div>
-    <div class="results" th:if="${account.id != null}">
-        <h3>You have registered an account successfully!</h3>
-        <h4><a th:href="@{/login}">Click here to Login</a></h4>
-    </div>
-
 </div>
 </body>
 </html>

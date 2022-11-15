@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
 import java.util.List;
 
 @RestController
@@ -29,17 +30,18 @@ public class AccountController {
         return modelAndView;
     }
 
-    @PostMapping("/process_account")
-    public ModelAndView processAccount(ModelAndView modelAndView, Account account) {
-        accountRepository.save(account);
-        modelAndView.setViewName("redirect:/accounts");
-        return modelAndView;
-    }
-
     @GetMapping("/register-account")
     public ModelAndView registerAccount(ModelAndView modelAndView) {
         modelAndView.addObject("account", new Account());
         modelAndView.setViewName("new-account.html");
+        return modelAndView;
+    }
+
+    @PostMapping("/process_account")
+    public ModelAndView processAccount(ModelAndView modelAndView, Account account, Authentication auth) {
+        account.setEmail(auth.getName());
+        accountRepository.save(account);
+        modelAndView.setViewName("redirect:/accounts");
         return modelAndView;
     }
 
@@ -56,15 +58,16 @@ public class AccountController {
 
     @GetMapping("/edit/{id}")
     public ModelAndView editAccount(@PathVariable("id") int id, ModelAndView modelAndView) {
-        accountRepository.editAccount(id, "www.asdasdsa.pt", "123456");
-        modelAndView.setViewName("redirect:/accounts");
+        modelAndView.addObject("account", accountRepository.findById(id));
+        modelAndView.setViewName("edit-account.html");
         return modelAndView;
     }
 
-    @PostMapping("/update")
-    public ModelAndView realEditAccount (Account account, ModelAndView modelAndView) {
+    @PostMapping("/process_edit")
+    public ModelAndView realEditAccount(Account account, ModelAndView modelAndView, Authentication auth) {
+        account.setEmail(auth.getName());
         accountService.updateAccount(account);
-        modelAndView.setViewName("redirect:/");
+        modelAndView.setViewName("redirect:/accounts");
         return modelAndView;
     }
 
