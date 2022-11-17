@@ -26,6 +26,7 @@ public class AccountController {
 
     @GetMapping("/")
     public ModelAndView homePage(ModelAndView modelAndView) {
+        System.out.println();
         modelAndView.setViewName("homepage.html");
         return modelAndView;
     }

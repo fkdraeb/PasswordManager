@@ -38,13 +38,13 @@
             <tr>
                 <th>Website</th>
                 <th>Password</th>
-                <th colspan="2"></th>
+                <th colspan="2"/>
             </tr>
             </thead>
             <tbody>
             <tr th:each="account: ${listAccounts}">
-                <td th:text="${account.website}">Website</td>
-                <td th:text="${account.password}">Password</td>
+                <td th:text="${account.website}"></td>
+                <td th:text="${account.password}"></td>
                 <td>
                     <a th:href="@{/edit/{id}(id=${account.id})}"
                        class="btn btn-dark">

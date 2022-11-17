@@ -4,6 +4,7 @@ import com.PasswordManager.Entity.User;
 import com.PasswordManager.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,16 +17,6 @@ public class UserController {
 
     @Autowired
     UserRepository userRepository;
-
-
-    /*
-    String existedUsername = service.createUser(userDTO);
-    if(existedUsername != null){
-        model.addAttribute("existedUsername",existedUsername);
-    }
-
-    return "registrationstatus";
-     */
 
     @GetMapping("/register")
     public ModelAndView registerPage(ModelAndView modelAndView) {

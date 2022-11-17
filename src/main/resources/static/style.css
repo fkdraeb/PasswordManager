@@ -20,6 +20,10 @@ h1 {
     padding-bottom: 50px;
 }
 
+.hidetext {
+    -webkit-text-security: disc;
+}
+
 td {
     color: black;
     background-color: #898989;
