@@ -1,0 +1,115 @@
+body {
+    background: #616266;
+    padding-top: 50px;
+}
+
+form {
+    display: inline;
+}
+
+.results {
+    padding-top: 30px;
+}
+
+.results button.btn.btn-dark {
+    margin-top: 20px;
+    margin-right: 5px;
+}
+
+h1 {
+    padding-bottom: 50px;
+}
+
+.hidetext {
+    -webkit-text-security: disc;
+}
+
+td {
+    color: black;
+    background-color: #898989;
+}
+
+.alert.alert-danger.notification{
+    margin: auto;
+    width: 800px;
+    margin-bottom: 20px;
+}
+
+.alert.alert-danger.notification, p{
+    display: inline;
+}
+
+.errorMsgUser {
+    padding: 20px 0 20px;
+}
+
+.container.text-center.tabs a {
+  background-image: linear-gradient(
+    to right,
+    white,
+    white 50%,
+    #000 50%
+  );
+  background-size: 200% 100%;
+  background-position: -100%;
+  display: inline-block;
+  padding: 5px 0;
+  position: relative;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease-in-out;
+
+}
+
+.container.text-center.tabs a:hover {
+ background-position: 0;
+}
+
+.container.text-center.tabs a:hover::before{
+  width: 100%;
+}
+
+.branding {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding-bottom: 50px;
+}
+
+.water{
+            width:150px;
+            height: 150px;
+            background-color: #c50303;
+            border-radius: 50%;
+            position: relative;
+            box-shadow: inset 0 0 30px 0 rgba(0,0,0,.5), 0 4px 10px 0 rgba(0,0,0,.5);
+            overflow: hidden;
+        }
+        .water:before, .water:after{
+            content:'';
+            position: absolute;
+            width:150px;
+            height: 150px;
+            top:-60px;
+            background-color: #fff;
+        }
+        .water:before{
+            border-radius: 45%;
+            background:rgba(255,255,255,.7);
+            animation:wave 5s linear infinite;
+        }
+        .water:after{
+            border-radius: 35%;
+            background:rgba(255,255,255,.3);
+            animation:wave 5s linear infinite;
+        }
+        @keyframes wave{
+            0%{
+                transform: rotate(0);
+            }
+            100%{
+                transform: rotate(360deg);
+            }
+        }
