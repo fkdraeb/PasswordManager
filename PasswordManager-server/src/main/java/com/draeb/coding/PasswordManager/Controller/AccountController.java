@@ -48,7 +48,8 @@ public class AccountController {
     public ModelAndView processAccount(ModelAndView modelAndView, Account account, Authentication auth) {
         account.setEmail(auth.getName());
 
-        //account.setPassword(Base64.getEncoder().encodeToString(account.getPassword().getBytes()));
+        // TODO set enconded password onto DB
+        // account.setPassword(Base64.getEncoder().encodeToString(account.getPassword().getBytes()));
         accountRepository.save(account);
         accountRepository.flush();
         modelAndView.setViewName("redirect:/accounts");
@@ -62,7 +63,7 @@ public class AccountController {
 
         List<Account> listAccounts = accountRepository.findByEmail(name);
 
-
+        //TODO decode password to show it to the user
 
         modelAndView.addObject("listAccounts", listAccounts);
         modelAndView.setViewName("accounts.html");
