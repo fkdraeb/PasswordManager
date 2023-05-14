@@ -21,6 +21,9 @@ public @Data class User {
     private String firstName;
     @Column(nullable = false)
     private String lastName;
+//    //TODO one to many correlation with accountEntity - Ainda não funciona bem
+//    @OneToMany(fetch = FetchType.LAZY)
+//    private List<Account> accountList;
 
     public User(Integer id, String email, String password, String firstName, String lastName) {
         this.id = id;
@@ -28,6 +31,7 @@ public @Data class User {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        //this.accountList = new ArrayList<Account>();
     }
 
     public User() {
