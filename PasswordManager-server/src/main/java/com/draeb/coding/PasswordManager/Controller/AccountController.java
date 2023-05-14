@@ -3,7 +3,6 @@ package com.draeb.coding.PasswordManager.Controller;
 import com.draeb.coding.PasswordManager.Entity.Account;
 import com.draeb.coding.PasswordManager.Repository.AccountRepository;
 import com.draeb.coding.PasswordManager.Service.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,16 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Base64;
 import java.util.List;
 
 @RestController
 public class AccountController {
 
-    //@Autowired
     private AccountRepository accountRepository;
-
-    //@Autowired
     private AccountService accountService;
 
 
@@ -32,7 +27,6 @@ public class AccountController {
 
     @GetMapping("/")
     public ModelAndView homePage(ModelAndView modelAndView) {
-        System.out.println();
         modelAndView.setViewName("homepage.html");
         return modelAndView;
     }
@@ -48,8 +42,8 @@ public class AccountController {
     public ModelAndView processAccount(ModelAndView modelAndView, Account account, Authentication auth) {
         account.setEmail(auth.getName());
 
-        // TODO set enconded password onto DB
-        // account.setPassword(Base64.getEncoder().encodeToString(account.getPassword().getBytes()));
+        account.setPassword(accountService.encodePassword(account.getPassword()));
+
         accountRepository.save(account);
         accountRepository.flush();
         modelAndView.setViewName("redirect:/accounts");
@@ -59,26 +53,28 @@ public class AccountController {
     @GetMapping("/accounts")
     public ModelAndView listAccounts(ModelAndView modelAndView) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name = auth.getName();
 
-        List<Account> listAccounts = accountRepository.findByEmail(name);
+        //TODO decode password to show it to the user, but just the one that it's clicked
+        List<Account> accountList = accountService.accountsList(auth.getName());
 
-        //TODO decode password to show it to the user
-
-        modelAndView.addObject("listAccounts", listAccounts);
+        modelAndView.addObject("listAccounts", accountList);
         modelAndView.setViewName("accounts.html");
         return modelAndView;
     }
 
     @GetMapping("/edit/{id}")
     public ModelAndView editAccount(@PathVariable("id") int id, ModelAndView modelAndView) {
-        modelAndView.addObject("account", accountRepository.findById(id));
+        //TODO add protection so it will not crash
+        Account account = accountRepository.findById(id).get();
+        account.setPassword(accountService.decodePassword(account.getPassword()));
+
+        modelAndView.addObject("account", account);
         modelAndView.setViewName("edit-account.html");
         return modelAndView;
     }
 
     @PostMapping("/process_edit")
-    public ModelAndView realEditAccount(Account account, ModelAndView modelAndView, Authentication auth) {
+    public ModelAndView editAccountProcessor(Account account, ModelAndView modelAndView, Authentication auth) {
         account.setEmail(auth.getName());
         accountService.updateAccount(account);
         modelAndView.setViewName("redirect:/accounts");
@@ -92,5 +88,4 @@ public class AccountController {
         modelAndView.setViewName("redirect:/accounts");
         return modelAndView;
     }
-
 }
