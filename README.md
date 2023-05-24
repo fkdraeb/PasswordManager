@@ -19,14 +19,17 @@ PasswordManager uses shell scripts and docker images to run
 
 ## Running
 
-1. 
+1. Download and run an alpine image that runs a PostgreSQL server 
 ```
 sh 01_setup.sh
-\\ This will download and run an alpine image that runs a PostgreSQL server 
 ```
 
-2.
+2. Building and running PasswordManager
 ```
 sh 02_run.sh
-\\ This will build and run password-manager
+```
+
+3. Access the webpage
+```
+localhost:8090
 ```
