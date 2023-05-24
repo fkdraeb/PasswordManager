@@ -16,6 +16,7 @@ This version is still in continous development.
 PasswordManager uses shell scripts and docker images to run 
 * Linux distro
 * Docker Engine
+* Maven
 
 ## Running
 
