@@ -5,8 +5,6 @@ PasswordManager is password manager capable of holding multiple users.
 This version is still in continous development.
 > Developed Tiago Marques
 
-<img src="https://j.gifs.com/qj5Dv2@large.gif?download=true">
-
 - [PasswordManager](#passwordmanager)
   - [Requirements](#requirements)
   - [Running](#running)
